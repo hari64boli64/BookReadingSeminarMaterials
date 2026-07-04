@@ -100,6 +100,9 @@ Unor, Vnor = -Fnor[..., 0], -Fnor[..., 1]
 ax.quiver(X, Y, Unor, Vnor, angles="xy", scale_units="xy",
           width=0.0048, color=TAB10[4], alpha=0.95)
 ax.plot(a[0], a[1], marker="*", ms=14, color="gold", zorder=5)
+ax.plot([a[0], xstar[0]], [a[1], xstar[1]], linestyle="--",
+        color=TAB10[1], lw=2.2, zorder=4)
+ax.plot(xstar[0], xstar[1], "o", ms=8, color=TAB10[3], zorder=6)
 ax.set_title(
     "Normal map\n"
     r"$-F_K^{\mathrm{nor}}(z)=-F(\Pi_K(z))-z+\Pi_K(z)$, $z\in\mathbb{R}^2$",

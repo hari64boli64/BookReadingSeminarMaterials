@@ -225,18 +225,17 @@
     \begin{equation*}
         x \in \operatorname{SOL}(K,F) \iff F_K^{\mathrm{nat}}(x) = 0
     \end{equation*}
-    雑理解: VIが$-F$の$K$上安定点を求める問題で、natural mapは$-F$方向に進む射影勾配降下法の1ステップ。Prop 1.5.8の同値性も自然、証明はVIと$\Pi$の定義より不等式評価。\\
+    雑理解: VIが $-F$ の $K$ 上安定点を求める問題で、natural mapは $-F$ 方向に進む射影勾配降下法の1ステップ。Prop 1.5.8の同値性も自然、証明はVIと $\Pi$ の定義より不等式評価。\\
 
     normal map:
     \begin{equation*}
         F_K^{\mathrm{nor}}(v) \coloneqq F(\Pi_K(v)) + v - \Pi_K(v).
     \end{equation*}
-    Proposition 1.5.8 ($K$: closed convex):
+    Proposition 1.5.9 ($K$: closed convex):
     \begin{equation*}
-        x \in \operatorname{SOL}(K,F) \iff F_K^{\mathrm{nat}}(x) = 0
+        x \in \operatorname{SOL}(K,F) \iff \exists z \in \mathbb{R}^n \text{ s.t. } x=\Pi_K(z) \text{ and } F_K^{\mathrm{nor}}(z)=0
     \end{equation*}
-    雑理解: normal mapは$-F$方向に進む射影勾配降下法の1ステップ。Prop 1.5.8の同値性も自然、証明はVIと$\Pi$の定義より不等式評価。\\
-
+    雑理解: normal mapの零点 $z$ は、射影した先の点 $x$ がVIの解であることを保証する、証明はVIと $\Pi$ の定義より不等式評価。
 
     \begin{figure}[H]
         \centering
@@ -253,7 +252,7 @@
     \[
         \deg(\Phi,\Omega,p)\in\mathbb Z
     \]
-    は、大雑把には$\Omega$ 内にある方程式 $\Phi(x)=p$ の零点の向き付き個数を表す。
+    は、大雑把には $\Omega$ 内にある方程式 $\Phi(x)=p$ の零点の向き付き個数を表す。
     $p=0$ のときは $\deg(\Phi,\Omega)\coloneqq\deg(\Phi,\Omega,0)$ と略記する。
     また、以下が成り立つ。
     \[
@@ -340,12 +339,12 @@
         &&(\text{max})\\
         &>0 && (\text{assumption})
     \end{align*}
-    より、$p\notin H(\partial\Omega,t)$なので、$\deg(\Phi,\Omega,p)=\deg(\Upsilon,\Omega,p)$.
+    より、$p\notin H(\partial\Omega,t)$ なので、$\deg(\Phi,\Omega,p)=\deg(\Upsilon,\Omega,p)$.
     }
 \end{proof}}
 }
 
-\bookBox{命題5.1.3：natural mapによる局所可解性}{
+\bookBox{命題5.1.3:natural mapによる局所可解性}{
     $F_K^{\mathrm{nat}}$ をnatural mapとする。孤立解 $x^*$ における $\operatorname{ind}(F_K^{\mathrm{nat}},x^*)$ が非零ならば、(5.1.1) を満たす任意の開近傍 $N$ に対し、
     \[
         \varepsilon=\operatorname{dist}_\infty
@@ -354,28 +353,34 @@
     とおくことで、$\norm{G-F}_{\overline N}<\varepsilon$ を満たす $G$ による
     $\operatorname{VI}(K,G)$ は $N$ 内に解をもつ。
 
-    % \begin{figure}[H]
-    %     \centering
-    %     % \includegraphics[width=\columnwidth]{path}
-    %     \caption{todo!!!}
-    % \end{figure}
-
     (直観としては自明、証明も難しくない、略)
 }
 
-\bookBox{命題5.1.4：normal mapによる誤差条件の局所化}{
-    normal mapを用いると仮定を局所化できる。$z^*=x^*-F(x^*)$、$K_N=K\cap\overline N$ とおく。
-    $\operatorname{ind}(F_K^{\mathrm{nor}},z^*)\ne0$ ならば、ある $\varepsilon>0$ が存在し、
-    $G-F$ の大きさを $K_N$ 上だけで抑えれば $\operatorname{VI}(K,G)$ は $N$ に解をもつ。
+\bookBox{命題5.1.4:normal mapによる誤差条件の局所化}{
+    $F_K^{\mathrm{nor}}$ をnormal mapとし、$z^*=x^*-F(x^*)$ とする。孤立解 $x^*$ に対応する
+    $\operatorname{ind}(F_K^{\mathrm{nor}},z^*)$ が非零ならば、(5.1.1) を満たす任意の開近傍 $N$ に対し、
+    $\Pi_K(Z)\subset N$ かつ $z^*$ が $\overline Z$ における $F_K^{\mathrm{nor}}$ の唯一の零点となる
+    $z^*$ の開近傍 $Z$ をとり、
+    \[
+        \varepsilon=\operatorname{dist}_\infty
+        (0,F_K^{\mathrm{nor}}(\partial Z))>0
+    \]
+    とおくことで、$K_N=K\cap\overline N$ 上で
+    $\norm{G-F}_{K_N}<\varepsilon$ を満たす $G$ による
+    $\operatorname{VI}(K,G)$ は $N$ 内に解をもつ。
 
-    命題5.1.3との違いは誤差を測る領域である。natural mapでは $\overline N$ 上で
-    $G-F$ を抑えたが、normal mapでは実行可能点だけからなる
-    $K_N=K\cap\overline N$ 上で抑えればよい。
+    この命題は、natural mapの場合に比べ、関数の変動をバウンドすべき領域が $K_N = K \cap \overline{N}$ という、より小さい範囲に限定されている(ただし、$\epsilon$ も変わっているので、完全上位互換という訳ではない)。
+    その理由は、proofにもある不等式の行間を埋めれば分かる:
+    \begin{align*}
+        &\sup_{z \in \operatorname{cl} \mathcal{Z}} \norm{G_K^{\mathrm{nor}}(z)-F_K^{\mathrm{nor}}(z)} && (\text{左辺})\\
+        ={}&\sup_{z \in \operatorname{cl} \mathcal{Z}} \norm{G(\Pi_K(z))+z-\Pi_K(z)-F(\Pi_K(z))-z+\Pi_K(z)} && (\text{normal mapの定義})\\
+        \leq{} & \sup_{z \in \operatorname{cl} \mathcal{Z}} \norm{G(\Pi_K(z))-F(\Pi_K(z))} && (\text{整理})\\
+        \leq {}& \sup_{x \in K \cap \operatorname{cl} \mathcal{N}} \norm{G(x)-F(x)}_2 && (\text{射影の定義})\\
+        < {}& \epsilon. &&(\text{右辺})
+    \end{align*}
 }
 
-\bookBox{系5.1.5：パラメータ付きVIの局所可解性と収束}{
-    \textit{参照：原著 Chapter 5, \S5.1, pp.423--424, Corollary 5.1.5。}\\
-
+\bookBox{系5.1.5:パラメータ付きVIの局所可解性と収束 \red{($H$ は $F$ の誤植!)}}{
     パラメータ付きの固定集合 VI では、$F(\cdot,p^*)$ に対するnormal mapの指数が非零で、
     \[
         \sup_{x\in K\cap N}\norm{F(x,p)-F(x,p^*)}
@@ -386,43 +391,45 @@
     \[
         \lim_{p\to p^*}\sup\{\norm{x-x^*}:x\in S_N(p)\}=0.                 \tag{5.1.3}
     \]
-    第1段階では、$\norm{p-p^*}$ を十分小さくして上の誤差を命題5.1.4の
-    $\varepsilon$ 未満にし、$S_N(p)\ne\varnothing$ を得る。第2段階では、任意の列
-    $p_k\to p^*$ と $x_k\in S_N(p_k)$ をとると
-    $F(\cdot,p_k)\to F(\cdot,p^*)$ が $K\cap N$ 上で一様に成り立つため、
-    命題5.1.2から $x_k\to x^*$ となる。この列による特徴づけが (5.1.3) を与える。
-    より明示的には、(5.1.3) が偽ならば、ある $\delta>0$、$p_k\to p^*$ および
-    $x_k\in S_N(p_k)$ を
-    \[
-        \norm{x_k-x^*}\ge\delta\qquad(k=1,2,\ldots)
-    \]
-    となるように選べる。しかし命題5.1.2は $x_k\to x^*$ を与えるので矛盾する。
 
-    (5.1.3) の $\sup$ は重要である。これは特定の解の選択
-    $x(p)\in S_N(p)$ だけが収束するのではなく、$N$ 内に存在する摂動解が複数あっても、
-    それらすべてと $x^*$ との最大距離が $0$ に近づくことを述べている。
-    したがってこの系も一意性は保証しないが、近傍内の解集合全体が
-    $x^*$ の周囲へ収縮することを保証する。
+    これはかなり自明。リプシッツ連続性から、命題5.1.4の条件にある関数の変動幅の条件 ($\norm{G-F}_{K_N}<\epsilon$) を十分近傍に取れば満たせるので、前半は直ちに従う。
+    後半も、解があることが既に分かっているので、命題5.1.2 (孤立解は近傍解の集積点である) より、解は集積するので、式(5.1.3)も自明。
 }
 
-\myBox{位相的次数の役割}{
-    非零次数は、境界を通って零点が逃げない限り内部の零点が消滅できないことを表す。
-    したがってここでの指数条件は「解の個数」を直接数える条件というより、
-    摂動下で少なくとも一つの解を近傍に残すための位相的な証明書と理解するとよい。
-    一意性と存在性を別々に扱う本節の構成も、この役割分担を反映している。
+\myBox{議論の流れの整理}{
+    ここまでの議論で、(リプシッツ性の仮定のもとで)
+    \begin{itemize}
+        \item 命題5.1.2 → 摂動問題でも解が非空かどうかが、感度分析の本質
+        \item 系5.1.4 → indの値が非零かどうかが、摂動問題でも解が非空かどうかかの本質
+    \end{itemize}
+    ということが分かった。そして、
+    \begin{itemize}
+        \item 以降の議論 → 臨界錐上の正値性が、indの値が非零かどうかの本質
+    \end{itemize}
+    という議論を展開する。
 }
 
-\bookBox{命題5.1.6--系5.1.8:臨界錐上の正値性と定量評価}{
+\myBox{臨界錐}{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\columnwidth]{critical_cone.png}
+    \end{figure}
+}
+
+\bookBox{命題5.1.6:臨界錐上の正定値性}{
     $F$ が解 $x^*$ で B微分可能とする。臨界錐
     \[
-        C(x^*;K,F)=T(x^*;K)\cap F(x^*)^\perp
+        \mathcal{C}(x^*;K,F)=\mathcal{T}(x^*;K)\cap F(x^*)^\perp
     \]
     上で
     \[
         v^\top F'(x^*;v)>0
         \qquad(0\ne v\in C(x^*;K,F))                                  \tag{5.1.4}
     \]
-    が成り立つなら、natural mapとnormal mapの指数はいずれも定義され非零となる（命題5.1.6）。
+    が成り立つなら、natural mapとnormal mapの指数はいずれも定義され非零となる。
+}
+
+\bookBox{}{
     証明では $F$ と $x\mapsto x-z^*$ を結ぶホモトピー
     \[
         F_t(x)=tF(x)+(1-t)(x-z^*)
