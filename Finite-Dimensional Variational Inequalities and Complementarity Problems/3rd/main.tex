@@ -125,6 +125,7 @@
     \begin{equation*}
         \text{Find} \quad x \in K \quad \text{s.t.} \quad (y-x)^\top F(x) \geq 0 \quad \text{for all} \quad y \in K.
     \end{equation*}
+    (本稿で繰り返し現れる解釈: \href{https://www.kurims.kyoto-u.ac.jp/coss/coss2019/hayashi-lecture1.pdf}{林先生の資料} p.16 「変分不等式問題は集合 $K$ 上で働く力のベクトル場 $-F$ に対する『安定点』を求める問題」)\\
     線形相補性問題 (Linear Complementarity Problem) $\operatorname{LCP}(q,M)$:
     \begin{equation*}
         \text{Find} \quad x \in \mathbb{R}^n \quad \text{s.t.} \quad 0 \leq x \perp Mx+q \geq 0.
@@ -159,7 +160,7 @@
 \myBox{最適化問題との対応}{
     $F=\nabla f$ のとき、$\operatorname{VI}(K,F)$ は制約付き最適化の一階条件である。
     したがって孤立感度解析は、目的関数やパラメータを少し変えた際に局所解が残るか、また解がどの程度動くかを調べる問題と解釈できる(cf.\ LPの感度分析)。
-    ただし一般の VI ではポテンシャル $f$ が存在するとは限らず、以下の議論は勾配構造を仮定しない。
+    ただし一般の VI ではポテンシャル $f$ が存在するとは限らず、あくまで直感的理解の補助。
 }
 
 \bookBox{Example 5.1.1}{\\
@@ -173,15 +174,15 @@
         q=(0,-1,1)^\top,\qquad
         M=\begin{bmatrix}0&-1&-1\\1&0&0\\-1&0&0\end{bmatrix}
     \]
-    による LCP は一意解 $(1,0,0)$ をもつ一方、$q(\varepsilon)=(-\varepsilon,-1,1)^\top$
-    とすると任意の $\varepsilon>0$ で解が存在しない。この例外をどう説明するか?
+    による LCP は一意解 $(1,0,0)$ をもつ一方、$q(\varepsilon)=(\varepsilon,-1,1)^\top$
+    とすると任意の $\varepsilon<0$ で解が存在しない。
+    この例外をどう説明するか?
+    また、この反例より「元の解($x^*_F \in \operatorname{SOL}(K,F)$)が孤立していること」と「近い問題($\operatorname{SOL}(K,G \approx F)$)に近い解($x^*_G \approx x^*_F$)が存在すること」は別の性質だと分かる。
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\columnwidth]{example5.1.1.png}
+        \includegraphics[width=0.75\columnwidth]{example5.1.1.png}
     \end{figure}
-
-    この反例より「元の解($x^*_F \in \operatorname{SOL}(K,F)$)が孤立していること」と「近い問題($\operatorname{SOL}(K,G \approx F)$)に近い解($x^*_G \approx x^*_F$)が存在すること」は別の性質だと分かる。
 }
 
 \myBox{関数の近傍の定義}{
@@ -205,7 +206,7 @@
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.8\columnwidth]{proposition5.1.2.png}
+        \includegraphics[width=0.75\columnwidth]{proposition5.1.2.png}
     \end{figure}
 
     証明の要点はコンパクト性と極限操作。
@@ -358,6 +359,17 @@
     (直観としては自明、証明も難しくない、略)
 }
 
+\myBox{議論の流れの整理}{
+    ここまでの議論で、
+    \begin{itemize}
+        \item 命題5.1.2 → 摂動問題でも解が非空かどうかが、感度分析の本質
+        \item 命題5.1.3 → indの値が非零かどうかが、摂動問題でも解が非空かどうかかの本質
+    \end{itemize}
+    ということが分かった。
+    このindの値が非零という条件を、もう少し扱いやすくしていくのが、命題5.1.4と系5.1.5。
+}
+
+
 \bookBox{命題5.1.4:normal mapによる誤差条件の局所化}{
     $F_K^{\mathrm{nor}}$ をnormal mapとし、$z^*=x^*-F(x^*)$ とする。孤立解 $x^*$ に対応する
     \red{$\operatorname{ind}(F_K^{\mathrm{nor}},z^*)$ が非零}ならば、(5.1.1) を満たす任意の開近傍 $N$ に対し、
@@ -421,6 +433,13 @@
         $\varepsilon=0$ で合流し、$\varepsilon>0$ で消滅する。}
     \end{figure}
 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\columnwidth]{optimization_surface_example.png}
+        \caption{quiverで示した矢印が、$-\nabla f$ となるような $f$ のプロット。最適化で言う鞍点に $x^*$ があるとマズいということを主張している。完全に鞍点と1対1対応している訳ではないので注意が必要だが、理解には役立つ。}
+    \end{figure}
+
+
     この消滅をindから確認しよう。射影を成分ごとに計算すると
     \[
         (F_0)_K^{\mathrm{nat}}(x)
@@ -432,6 +451,12 @@
         \includegraphics[width=0.4\columnwidth]{absolute_value_vector_field.png}
         \caption{$(F_0)_K^{\mathrm{nat}}(x)$}
     \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \fbox{\includegraphics[width=\columnwidth]{prop2.1.4.png}}
+    \end{figure}
+
     $u=x_1-1$, $v=x_2$ とおき、原点に十分近い正則値
     $p=(a,-b)$（$b>0$）をとると、その逆像は $(a,b)$ と $(a,-b)$ の2点である。
     $v>0$ では写像は $(u,v)\mapsto(u,-v)$ で行列式の符号は $-1$、
@@ -462,7 +487,7 @@
 \myBox{臨界錐}{
     \begin{figure}[H]
         \centering
-        \includegraphics[width=\columnwidth]{critical_cone.png}
+        \fbox{\includegraphics[width=\columnwidth]{critical_cone.png}}
     \end{figure}
 }
 
@@ -487,7 +512,16 @@
         =\mathbb{R}\times\mathbb{R}_+.
     \]
     特に $v=(0,1)^\top$ に対して
-    $v^\top F_0'(x^*;v)=-1<0$ であり、命題5.1.6の条件 (5.1.4) は成立しない。
+    $v^\top F_0'(x^*;v)=-1<0$ であり、命題5.1.6の条件 である式(5.1.4) は成立しない。
+
+    また、もし$F_0(x^*) \neq 0$の場合、critical coneは、
+    \[
+        \mathcal{C}(x^*;K,F_0)
+        =\mathcal{T}(x^*;K)\cap F_0(x^*)^\perp
+        =\mathbb{R}\times\{0\}.
+    \]
+    つまり、横方向の直線となる。
+    式(5.1.4)の意味としては、横方向に少しだけ動いても、元の場所に戻る方向に力が働く ($v^\top (-F'(x^*;v))<0$) ということになる。
 }
 
 \myBox{二次十分条件との類似}{
@@ -498,13 +532,13 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\columnwidth]{optimization_surface_example.png}
-        \caption{先ほどの例について、quiverで示した矢印が、$-\nabla f$となるような$f$のプロット。最適化で言う鞍点に$x^*$があるとマズいということを主張している。}
+        \caption{先ほどの例で、quiverで示した矢印が、$-\nabla f$ となるような $f$ のプロット。}
     \end{figure}
 }
 
 \bookBox{証明}{
     証明ではnormal mapのみについて証明する。natural mapも同様。
-    解 $x^*$ に対応するnormal mapでの零点を$z^*$とする。
+    解 $x^*$ に対応するnormal mapでの零点を $z^*$ とする。
     $x \mapsto F(x)$ と $x\mapsto x-z^*$ を結ぶホモトピー
     \[
         F_t(x)=tF(x)+(1-t)(x-z^*)
@@ -516,7 +550,7 @@
 
 \bookBox{補題5.1.7:解の移動量の制御}{
     式(5.1.4)を満たすのならば、
-    $x^*$に解が存在しない$x^*$の近傍 $N$ に対してある $c>0$ が存在し、任意の$q \in \mathbb{R}^n$に対して、
+    $x^*$ に解が存在しない $x^*$ の近傍 $N$ に対してある $c>0$ が存在し、任意の $q \in \mathbb{R}^n$ に対して、
     \[
         \sup\{\norm{x-x^*}:x\in\operatorname{SOL}(K,q+F)\cap\overline N\}
         \le c\norm{q}
@@ -537,8 +571,16 @@
 
 \newpage
 
+\bookBox{5.2節}{
+    $K=\mathbb R^n$ とすれば VI は方程式 $H(x)=0$ になる。
+}
+
+\myBox{解釈}{
+    今までは$K$の境界付近での議論を例にとることが多かったが、ここではそうではなくて、$K$の内点における議論のようなことをしていると解釈できる。
+}
+
 \bookBox{5.2 B微分可能方程式:半安定性と安定性}{
-    $K=\mathbb R^n$ とすれば VI は方程式 $H(x)=0$ になる。$H$ が零点 $x$ で B微分可能なとき、
+    $H$ が零点 $x$ で B微分可能なとき、
     次の三条件は同値である（補題5.2.1）:
     \begin{enumerate}[label=(\alph*)]
         \item $H'(x;v)=0$ ならば $v=0$;
@@ -547,175 +589,33 @@
     \end{enumerate}
     とくにこれらは $x$ の孤立性を含意する。さらに
     $\Gamma(y)=H'(x;y-x)$ とおいて $\operatorname{ind}(\Gamma,x)\ne0$ なら、
-    十分小さい一様摂動 $G$ は $x$ の近傍に零点をもつ（補題5.2.2）。B微分が $H$ の一次近似であるため
-    $\operatorname{ind}(\Gamma,x)=\operatorname{ind}(H,x)$ となり、次数論を適用できる。
+    十分小さい一様摂動 $G$ は $x$ の近傍に零点をもつ（補題5.2.2）。
+}
 
-    これを踏まえ、孤立零点 $x$ を次のように定義する（定義5.2.3）。
+\myBox{勾配による解釈}{
+    \begin{enumerate}[label=(\alph*)]
+        \item ヘッセ行列の全ての固有値が非零であることを意味している。
+        \item ヘッセ行列の固有値の絶対値の最小値が、$1/c'$以上である
+        \item 零点から少しだけ動かすと、動かした先の勾配のノルムの絶対値がある程度以上正になっている
+    \end{enumerate}
+    最後だけややトリッキーだが、直感的にはいずれも自明。
+}
+
+\bookBox{定義5.2.3 半安定と安定}{
+    孤立零点 $x$ の性質について、次のように定義する。
     \begin{itemize}
         \item \textbf{半安定}:小さい任意の摂動 $G$ の近傍零点 $x'$ が
               $\norm{x'-x}\le c\norm{H(x')}$ を満たす。ただし摂動後の零点の存在は要求しない。
         \item \textbf{安定}:上の誤差評価に加えて、全ての十分小さい摂動 $G$ が近傍に零点をもつ。
     \end{itemize}
-    よって $H'(x;\cdot)$ の零点が原点だけなら半安定であり、さらに指数が非零なら安定である
-    （定理5.2.4）。これらは局所概念であり、十分小さな近傍だけを考えればよい。
+    よって $H'(x;\cdot)$ の零点が原点だけなら半安定であり、さらに指数が非零なら安定である（定理5.2.4）。
+    これらは局所概念であり、十分小さな近傍だけを考えればよい。
 }
 
-\bookBox{強安定性と正則性（定義5.2.6--5.2.7）}{
-    任意の連続摂動に対して零点の一意性まで要求するのは強すぎる。実際 $H(t)=t$ でさえ、
-    $G(t)=t-\varepsilon'\sqrt{|t|}\sin(1/\sqrt{|t|})$ のような一様に小さい連続摂動を選べば、
-    任意の零点近傍に複数の零点を作れる（例5.2.5）。
-
-    そこで孤立零点 $x$ が\textbf{強安定}であるとは、十分小さい任意の摂動 $G,\widetilde G$ が近傍零点をもち、
-    それらの任意の零点 $v,\widetilde v$ に対して
-    \[
-        \norm{v-\widetilde v}
-        \le c\norm{H(v)-H(\widetilde v)}
-    \]
-    が成り立つことと定める。$\widetilde G=H$ とすれば半安定性が従うので、強安定なら安定である。
-    とくに右辺摂動 $H(y)=u$ に限れば、近傍解 $x(u)$ は一意で
-    \[
-        \norm{x(u)-x(u')}\le c\norm{u-u'}
-    \]
-    を満たす。
-
-    右辺摂動だけに限定した概念が\textbf{正則性}である。正則なら
-    $\varnothing\ne H^{-1}(u)\cap N\subset \mathbb B(x,c\norm{u})$、
-    \textbf{強正則}ならさらにこの集合は一元集合 $\{x_N(u)\}$ で、$x_N$ は Lipschitz 連続である。
-    任意の関数摂動を許す安定性は、対応する正則性より強い。
-}
-
-\bookBox{定理5.2.8--命題5.2.9:強安定性の特徴付け}{
-    連続写像 $H$ の零点 $x$ について、強安定性と強正則性は同値である（定理5.2.8(a)）。
-    強正則性から強安定性を示す際には、局所逆写像 $x_N$ と誤差 $e=H-G$ を使って
-    \[
-        \Phi(y)=x_N(e(y))
-    \]
-    を閉球からそれ自身への連続写像として構成し、Brouwer の不動点定理を適用する。
-
-    また $H$ が $x$ で局所 Lipschitz 同相なら $x$ は強安定である。逆に $H$ 自身が $x$ で
-    局所 Lipschitz 連続なら、強安定性から局所 Lipschitz 同相性が従う。したがって局所 Lipschitz 写像では
-    \[
-        \text{強安定}\quad\Longleftrightarrow\quad
-        \text{強正則}\quad\Longleftrightarrow\quad
-        \text{局所 Lipschitz 同相}.
-    \]
-
-    さらに $H$ が $x$ で強 F微分可能なら、次の全てが同値である（命題5.2.9）:
-    \[
-        \text{強安定},\quad \text{安定},\quad \text{正則},\quad
-        JH(x)\text{ が正則},\quad \text{局所 Lipschitz 同相}.
-    \]
-    滑らかな場合には結局、古典的な逆関数定理の非特異 Jacobian 条件へ帰着する。
-}
-
-\bookBox{垂直相補性問題と非滑らかな反例}{
-    $H(x)=\min(F(x),G(x))$ とおけば、$H(x)=0$ は垂直相補性問題
-    \[
-        0\le F(x)\perp G(x)\ge0
-    \]
-    と同値である。解 $x^*$ において
-    \[
-        \alpha_F=\{i:F_i(x^*)=0<G_i(x^*)\},\quad
-        \beta=\{i:F_i(x^*)=G_i(x^*)=0\},\quad
-        \alpha_G=\{i:F_i(x^*)>0=G_i(x^*)\}
-    \]
-    とする。非退化性 $\beta=\varnothing$ の下では、$H$ の各行は近傍で $F_i$ または $G_i$ の一方に固定される。
-    したがって
-    \[
-        \begin{bmatrix}
-            \nabla F_i(x^*)^\top:i\in\alpha_F \\
-            \nabla G_i(x^*)^\top:i\in\alpha_G
-        \end{bmatrix}
-    \]
-    が正則なら、十分小さい二組の摂動問題は近傍に一意解 $x_1,x_2$ をもち、解差は摂動差で
-    Lipschitz 評価できる（系5.2.10）。
-
-    一方、非滑らかな点では安定性と強安定性は一致しない。例5.2.11の
-    \[
-        H(x_1,x_2)=
-        \begin{bmatrix}\min(x_1,x_1+x_2)\\\min(x_2,x_1+x_2)\end{bmatrix}
-    \]
-    は原点を一意零点にもち、対応 LCP の厳密共正値性と指数 $1$ から安定である。
-    しかし $H(x)+(\varepsilon,\varepsilon)^\top=0$ は
-    $(-\varepsilon,0)$ と $(0,-\varepsilon)$ の少なくとも二解をもつため強安定ではない。
-    この例は、退化 VI・CP を扱うには滑らかな逆関数定理だけでは不十分であることを示す。
-}
-
-\bookBox{定理5.2.12・5.2.14:B微分による必要十分条件}{
-    $\Gamma(y)=H'(x;y-x)$ とする。$\Gamma$ が $x$ で\textbf{非消失性}をもつとは、ある連続写像 $\Phi$ が存在し、
-    全ての $\delta\ge0$ について $x$ が $\Phi+\delta\Gamma$ の唯一の零点であり、かつ
-    $\operatorname{ind}(\Phi,x)\ne0$ となることをいう。正則な線形部をもつアフィン写像や
-    $P_0$ 写像はこの性質をもつ。
-
-    $H$ が $x$ で B微分可能で $\Gamma$ が非消失性をもつなら、次は同値である（定理5.2.12）:
-    \begin{enumerate}[label=(\alph*)]
-        \item $x$ は $\Gamma$ の安定零点である;
-        \item $\Gamma$ は全射で、$\Gamma^{-1}(\mathbb B(0,1))$ は有界である;
-        \item $x$ は $\Gamma$ の唯一の零点である;
-        \item $x$ は $H$ の安定零点である。
-    \end{enumerate}
-    さらに安定性の定義で「全ての近傍」を要求する代わりに「ある一つの近傍」で条件が成り立てば十分である。
-
-    $H$ が $x$ で\textbf{強 B微分可能}なら、非消失性の仮定なしに次が同値となる（定理5.2.14）:
-    \[
-        0\text{ は }H'(x;\cdot)\text{ の強安定零点}
-        \Longleftrightarrow H'(x;\cdot)\text{ は大域的 Lipschitz 同相}
-        \Longleftrightarrow x\text{ は }H\text{ の強安定零点}.
-    \]
-    B微分が区分線形なら、第4章の区分線形写像に対する大域的同相条件も利用できる。
-}
-
-\bookBox{5.2.2 一次近似（FOA）への拡張}{
-    局所 Lipschitz 写像 $H$ に対し、$h$ が $x$ における一次近似（FOA）であるとは
-    \[
-        \lim_{y\to x,\,y\ne x}\frac{\norm{H(y)-h(y)}}{\norm{y-x}}=0
-    \]
-    を満たすことをいう。誤差 $e=H-h$ が
-    \[
-        \lim_{(y_1,y_2)\to(x,x),\,y_1\ne y_2}
-        \frac{\norm{e(y_1)-e(y_2)}}{\norm{y_1-y_2}}=0
-    \]
-    を満たすとき強 FOA と呼ぶ。FOA であることは $H$ と $h$ について対称である。
-    $H$ が B微分可能なら $h(y)=H(x)+H'(x;y-x)$ が FOA となる。
-
-    normal map $F_K^{\mathrm{nor}}$ では、射影 $\Pi_K$ を線形化せず $F$ だけを線形化した
-    半線形化 VI のnormal mapが FOA になる。すなわち $\bar x=\Pi_K(\bar z)$ として
-    \[
-        z\mapsto F_K^{\mathrm{nor}}(\bar z)
-        +JF(\bar x)(\Pi_K(z)-\Pi_K(\bar z))+z-\Pi_K(z).                 \tag{5.2.8}
-    \]
-    これは射影まで近似する B微分近似とは異なる。
-
-    命題5.2.15によれば、$h$ が $H$ の FOA で、$x$ が $H$ の安定零点かつ
-    $\operatorname{ind}(H,x)\ne0$ なら、$x$ は $h$ の安定零点である。
-    また $h$ が強 FOA なら、$x$ が $H$ の強安定零点であることと $h$ の強安定零点であることは同値である。
-    前半で指数条件を除けるかは明らかでない（注意5.2.16）。
-}
-
-\myBox{この範囲の見取り図}{
-    本範囲の条件は、おおむね次の三段階を担う。
-    \[
-        \begin{array}{c}
-            \text{方向微分の零点が原点のみ} \\[-1mm]
-            \Downarrow          \\[-1mm]
-            \text{誤差評価・孤立性（半安定）}
-        \end{array}
-        \qquad
-        \begin{array}{c}
-            +\ \text{非零指数} \\[-1mm]
-            \Downarrow     \\[-1mm]
-            \text{摂動解の存在（安定）}
-        \end{array}
-        \qquad
-        \begin{array}{c}
-            +\ \text{局所逆写像の一意性} \\[-1mm]
-            \Downarrow          \\[-1mm]
-            \text{Lipschitz な解応答（強安定）}.
-        \end{array}
-    \]
-    滑らかな問題ではこれらが Jacobian の正則性へまとまるが、非滑らか・退化した VI では分離する。
-    次節5.3は、この方程式に対する概念をnatural map・normal mapを介して固定集合 VI に移し、
-    VI 固有の構造を反映した安定性を定義するところから始まる。
+\myBox{半安定だが安定でない点とは?}{
+    これが個人的にめちゃくちゃ非自明(これの理解につまりすぎて以降を読むのを諦めました)。\\
+    鞍点の例が実際に半安定だが安定ではないのか? と思っていたが、恐らくこれは安定。摂動に対しても、安定的に鞍点が作られる。\\
+    関数の勾配的な解釈においては、3次関数のような場合を考えると、確かに摂動に対して零点が存在しなくなるような例が作れることが分かる。
 }
 
 \end{document}
