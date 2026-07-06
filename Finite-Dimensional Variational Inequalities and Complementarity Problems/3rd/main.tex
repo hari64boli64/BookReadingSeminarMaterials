@@ -133,16 +133,12 @@
     (LCPはVIの特殊形: \href{https://www.kurims.kyoto-u.ac.jp/coss/coss2019/hayashi-lecture1.pdf}{林先生の資料} p.21)
 }
 
-\bookBox{P.419 第1段落}{
+\bookBox{P.419}{
     $\operatorname{VI}(K,F)$ の解が、集合 $K$ や写像 $F$ の小さな変化に対してどのように変化するかを調べる。
     厳密には、閉凸集合の族および連続写像の空間に距離を導入して「小さな変化」を定式化する必要がある。
-}
 
-\bookBox{P.419 第2段落}{
     孤立解 $x^*$ を一つ固定し、摂動後の問題 $\operatorname{VI}(L,G)$ に $x^*$ の近くの解が存在するか、その解が孤立しているか、摂動が消えるとき近傍の解が $x^*$ に収束するかを問うのが\textbf{孤立感度解析 (isolated sensitivity analysis)}である。
-}
 
-\bookBox{P.419 第3段落、P.420 第2段落}{
     パラメータ付き問題
     \[
         \{\operatorname{VI}(K(p),F(\cdot,p)) : p\in P\}
@@ -191,12 +187,12 @@
         \mathbb B(H;\varepsilon,S)
         \coloneqq\left\{G:\sup_{y\in S}\norm{G(y)-H(y)}<\varepsilon\right\}
     \]
-    を $S$ 上の一様な $\varepsilon$-近傍とする。$\norm{G_k-H}_S \coloneqq \sup_{y \in  S} \norm{G(y)-H(y)} \to 0$ を $G_k$ が $S$ 上で $H$ に収束することと呼ぶ。(一様収束に近い定義)
+    を $S$ 上の一様な $\varepsilon$-近傍とする。$\norm{G_k-H}_S \coloneqq \sup_{y \in S} \norm{G_k(y)-H(y)} \to 0$ を $G_k$ が $S$ 上で $H$ に収束することと呼ぶ。(一様収束に近い定義)
 }
 
-\bookBox{命題5.1.2:孤立解は近傍解の集積点である}{
+\bookBox{命題5.1.2:近傍解は孤立解に収束する}{
     $F\colon D\to\mathbb R^n$ を連続とし、$x^*$ を $\operatorname{VI}(K,F)$ の孤立解とする。
-    $x^*$ の近傍 $N$ が
+    $x^*$ の有界開近傍 $N$ が
     \[
         \overline N\subset D,\qquad
         \operatorname{SOL}(K,F)\cap\overline N=\{x^*\}                         \tag{5.1.1}
@@ -255,7 +251,7 @@
     \[
         \deg(\Phi,\Omega,p)\in\mathbb Z
     \]
-    は、大雑把には $\Omega$ 内にある方程式 $\Phi(x)=p$ の零点の向き付き個数を表す。
+    は、大雑把には $\Omega$ 内にある方程式 $\Phi(x)=p$ の解の向き付き個数を表す。
     $p=0$ のときは $\deg(\Phi,\Omega)\coloneqq\deg(\Phi,\Omega,0)$ と略記する。
     また、以下が成り立つ。
     \[
@@ -309,7 +305,7 @@
         H\colon\overline{\Omega}\times[0,1]\to\mathbb{R}^{n},
     \end{equation*}
     \begin{equation*}
-        p \notin H(\partial\Omega,t) \implies         \deg(H(\cdot,t),\Omega,q(t)) \text{が不変}
+        p \notin H(\partial\Omega,t) \implies         \deg(H(\cdot,t),\Omega,p) \text{が不変}
     \end{equation*}
     }
     \textcolor{gray}{
@@ -363,7 +359,7 @@
     ここまでの議論で、
     \begin{itemize}
         \item 命題5.1.2 → 摂動問題でも解が非空かどうかが、感度分析の本質
-        \item 命題5.1.3 → indの値が非零かどうかが、摂動問題でも解が非空かどうかかの本質
+        \item 命題5.1.3 → indの値が非零かどうかが、摂動問題でも解が非空かどうかの本質
     \end{itemize}
     ということが分かった。
     このindの値が非零という条件を、もう少し扱いやすくしていくのが、命題5.1.4と系5.1.5。
@@ -407,7 +403,7 @@
     \]
 
     これはかなり自明。リプシッツ連続性から、命題5.1.4の条件にある関数の変動幅の条件 ($\norm{G-F}_{K_N}<\epsilon$) を十分近傍に取れば満たせるので、前半は直ちに従う。
-    後半も、解があることが既に分かっているので、命題5.1.2 (孤立解は近傍解の集積点である) より、解は集積するので、式(5.1.3)も自明。
+    後半も、解があることが既に分かっているので、命題5.1.2 (近傍解は孤立解に収束する) より、式(5.1.3)が従う。
 }
 
 \myBox{具体例による確認}{
@@ -475,7 +471,7 @@
     ここまでの議論で、(リプシッツ性の仮定のもとで)
     \begin{itemize}
         \item 命題5.1.2 → 摂動問題でも解が非空かどうかが、感度分析の本質
-        \item 系5.1.4 → indの値が非零かどうかが、摂動問題でも解が非空かどうかかの本質
+        \item 系5.1.5 → indの値が非零かどうかが、摂動問題でも解が非空かどうかの本質
     \end{itemize}
     ということが分かった。そして、
     \begin{itemize}
@@ -499,7 +495,7 @@
     上で
     \[
         v^\top F'(x^*;v)>0
-        \qquad(0\ne v\in C(x^*;K,F))                                  \tag{5.1.4}
+        \qquad(0\ne v\in \mathcal{C}(x^*;K,F))                         \tag{5.1.4}
     \]
     が成り立つなら、natural mapとnormal mapの指数はいずれも定義され非零となる。
 }
@@ -550,7 +546,7 @@
 
 \bookBox{補題5.1.7:解の移動量の制御}{
     式(5.1.4)を満たすのならば、
-    $x^*$ に解が存在しない $x^*$ の近傍 $N$ に対してある $c>0$ が存在し、任意の $q \in \mathbb{R}^n$ に対して、
+    $x^*$ 以外に解が存在しない $x^*$ の開近傍 $N$ に対してある $c>0$ が存在し、任意の $q \in \mathbb{R}^n$ に対して、
     \[
         \sup\{\norm{x-x^*}:x\in\operatorname{SOL}(K,q+F)\cap\overline N\}
         \le c\norm{q}
@@ -613,9 +609,71 @@
 }
 
 \myBox{半安定だが安定でない点とは?}{
-    これが個人的にめちゃくちゃ非自明(これの理解につまりすぎて以降を読むのを諦めました)。\\
-    鞍点の例が実際に半安定だが安定ではないのか? と思っていたが、恐らくこれは安定。摂動に対しても、安定的に鞍点が作られる。\\
-    関数の勾配的な解釈においては、3次関数のような場合を考えると、確かに摂動に対して零点が存在しなくなるような例が作れることが分かる。
+    半安定性は「摂動後の零点が存在するなら、その零点は元の零点の近くにある」ことを保証するが、
+    摂動後の零点の存在自体は要求しない。この違いは次の例で明確になる。
+
+    $H\colon\mathbb R\to\mathbb R$, $H(x)=|x|$ を考える。$0$ は $H$ の孤立零点であり、
+    任意の摂動 $G$ とその零点 $x'\in G^{-1}(0)$ に対して
+    \[
+        |x'-0|=|H(x')|
+    \]
+    が成り立つ。したがって、定義5.2.3の誤差評価は $c=1$ で成立し、$0$ は半安定である。
+    一方、任意に小さい $\varepsilon>0$ に対して
+    \[
+        G_\varepsilon(x)=|x|+\varepsilon
+    \]
+    は $H$ の一様な微小摂動だが零点をもたない。ゆえに $0$ は安定ではない。
+    B微分 $H'(0;v)=|v|$ の零点は $v=0$ だけなので半安定性の十分条件を満たす一方、
+    その指数は $0$ であり、安定性を保証する非零指数条件は満たさない、とも解釈できる。
+
+    これを積分すると、$H$ を勾配にもつ $C^1$ 関数として
+    \begin{equation*}
+        f(x)=
+        \begin{dcases}
+            -\frac{1}{2}x^2 & \text{if }x<0, \\
+            \frac{1}{2}x^2  & \text{if }x\geq0
+        \end{dcases}
+    \end{equation*}
+    が得られる。この $f$ は単調増加で、$0$ は極小点・極大点ではなく停留変曲点である。
+
+    \begin{figure}[H]
+        \centering
+        \begin{minipage}{0.47\columnwidth}
+            \centering
+            \begin{tikzpicture}[scale=1.15]
+                \draw[->] (-2.3,0) -- (2.3,0) node[right] {$x$};
+                \draw[->] (0,-2.3) -- (0,2.3) node[above] {$f(x)$};
+                \draw[cA,thick,domain=-2:0,samples=80]
+                    plot (\x,{-0.5*\x*\x});
+                \draw[cA,thick,domain=0:2,samples=80]
+                    plot (\x,{0.5*\x*\x});
+                \fill[cA] (0,0) circle (1.5pt);
+                \node[cA,above left] at (-1.35,-0.9) {$-x^2/2$};
+                \node[cA,below right] at (1.25,0.8) {$x^2/2$};
+            \end{tikzpicture}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.47\columnwidth}
+            \centering
+            \begin{tikzpicture}[scale=1.15]
+                \draw[->] (-2.3,0) -- (2.3,0) node[right] {$x$};
+                \draw[->] (0,-0.35) -- (0,2.5) node[above] {関数値};
+                \draw[cA,thick] (-2,2) -- (0,0) -- (2,2);
+                \draw[cD,thick,dashed] (-2,2.45) -- (0,0.45) -- (2,2.45);
+                \fill[cA] (0,0) circle (1.5pt);
+                \node[cA,above left] at (-1.65,1.65) {$H(x)=|x|$};
+                \node[cD,above right] at (0.45,0.9)
+                    {$G_\varepsilon(x)=|x|+\varepsilon$};
+                \draw[<->,gray] (0.15,0) -- (0.15,0.45)
+                    node[midway,right] {$\varepsilon$};
+            \end{tikzpicture}
+        \end{minipage}
+        \caption{左：$H=\nabla f$ を満たすポテンシャル。右：半安定な零点と、その零点を消滅させる一様摂動。}
+    \end{figure}
+
+    なお、$f(x)=x^3/3$ の勾配 $H(x)=x^2$ も、摂動 $x^2+\varepsilon$ によって零点が消える例ではある。
+    しかし $|x|\leq c|H(x)|=cx^2$ は $0$ の近傍で成立しないため、この零点は半安定ですらない。
+    また、非退化な鞍点ではヘッセ行列が正則で、勾配写像の零点の指数が非零となるため安定である。
 }
 
 \end{document}
