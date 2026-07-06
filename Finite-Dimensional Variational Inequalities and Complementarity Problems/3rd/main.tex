@@ -105,9 +105,9 @@
 
 \begin{document}
 
-\title{Supplemental Material for 06/30\\Book Reading Seminar}
+\title{Supplemental Material for 07/06\\Book Reading Seminar}
 \author{Hiroki Hamaguchi}
-\date{2026/06/30}
+\date{2026/07/06}
 \maketitle
 
 \begin{abstract}
@@ -207,7 +207,7 @@
 
     証明の要点はコンパクト性と極限操作。
     $\{x_k\}$ の任意の集積点 $x^\infty$ は、$G_k\to F$ と VI の不等式を極限に移すことにより $\operatorname{VI}(K,F)$ の解となる。
-    しかも $x^\infty\in\overline N$ なので (5.1.1) より $x^\infty=x^*$ である。
+    しかも $x^\infty\in\overline N$ なので 式(5.1.1) より $x^\infty=x^*$ である。
     集積点が一つしかないため列全体が $x^*$ に収束する。\\
 
     ただし、この命題は\red{摂動後の解が近傍に存在する}と仮定してその収束を述べる。
@@ -335,7 +335,7 @@
         -
         \max_{y\in\overline{\Omega}}
         \|\Phi(y)-\Upsilon(y)\|_{\infty}
-        &&(\text{max})\\
+        &&(\text{max property})\\
         &>0 && (\text{assumption})
     \end{align*}
     より、$p\notin H(\partial\Omega,t)$ なので、$\deg(\Phi,\Omega,p)=\deg(\Upsilon,\Omega,p)$.
@@ -344,7 +344,7 @@
 }
 
 \bookBox{命題5.1.3:natural mapによる局所可解性}{
-    $F_K^{\mathrm{nat}}$ をnatural mapとする。孤立解 $x^*$ における \red{$\operatorname{ind}(F_K^{\mathrm{nat}},x^*)$ が非零}ならば、(5.1.1) を満たす任意の開近傍 $N$ に対し、
+    $F_K^{\mathrm{nat}}$ をnatural mapとする。孤立解 $x^*$ における \red{$\operatorname{ind}(F_K^{\mathrm{nat}},x^*)$ が非零}ならば、式(5.1.1) を満たす任意の開近傍 $N$ に対し、
     \[
         \varepsilon=\operatorname{dist}_\infty
         (0,F_K^{\mathrm{nat}}(\partial N))>0
@@ -510,7 +510,7 @@
     特に $v=(0,1)^\top$ に対して
     $v^\top F_0'(x^*;v)=-1<0$ であり、命題5.1.6の条件 である式(5.1.4) は成立しない。
 
-    また、もし$F_0(x^*) \neq 0$の場合、critical coneは、
+    また、もし $F_0(x^*) \neq 0$ の場合、critical coneは、
     \[
         \mathcal{C}(x^*;K,F_0)
         =\mathcal{T}(x^*;K)\cap F_0(x^*)^\perp
@@ -572,7 +572,7 @@
 }
 
 \myBox{解釈}{
-    今までは$K$の境界付近での議論を例にとることが多かったが、ここではそうではなくて、$K$の内点における議論のようなことをしていると解釈できる。
+    今までは $K$ の境界付近での議論を例にとることが多かったが、ここではそうではなくて、$K$ の内点における議論のようなことをしていると解釈できる。
 }
 
 \bookBox{5.2 B微分可能方程式:半安定性と安定性}{
@@ -591,7 +591,7 @@
 \myBox{勾配による解釈}{
     \begin{enumerate}[label=(\alph*)]
         \item ヘッセ行列の全ての固有値が非零であることを意味している。
-        \item ヘッセ行列の固有値の絶対値の最小値が、$1/c'$以上である
+        \item ヘッセ行列の固有値の絶対値の最小値が、$1/c'$ 以上である
         \item 零点から少しだけ動かすと、動かした先の勾配のノルムの絶対値がある程度以上正になっている
     \end{enumerate}
     最後だけややトリッキーだが、直感的にはいずれも自明。
@@ -661,14 +661,14 @@
                 \draw[cA,thick] (-2,2) -- (0,0) -- (2,2);
                 \draw[cD,thick,dashed] (-2,2.45) -- (0,0.45) -- (2,2.45);
                 \fill[cA] (0,0) circle (1.5pt);
-                \node[cA,above left] at (-1.65,1.65) {$H(x)=|x|$};
-                \node[cD,above right] at (0.45,0.9)
+                \node[cA,above left] at (-1.0,0.4) {$H(x)=|x|$};
+                \node[cD,above right] at (-1.2,1.6)
                     {$G_\varepsilon(x)=|x|+\varepsilon$};
                 \draw[<->,gray] (0.15,0) -- (0.15,0.45)
                     node[midway,right] {$\varepsilon$};
             \end{tikzpicture}
         \end{minipage}
-        \caption{左：$H=\nabla f$ を満たすポテンシャル。右：半安定な零点と、その零点を消滅させる一様摂動。}
+        \caption{左:$H=\nabla f$ を満たすポテンシャル。右:半安定な零点と、その零点を消滅させる一様摂動。}
     \end{figure}
 
     なお、$f(x)=x^3/3$ の勾配 $H(x)=x^2$ も、摂動 $x^2+\varepsilon$ によって零点が消える例ではある。
